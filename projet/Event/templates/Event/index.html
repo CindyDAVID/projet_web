@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>La boite aux assos : Evenements</title>
+</head>
+<body>
+    <p>{% if latest_event_list %}
+        <ul>
+        {% for event in latest_event_list %}
+            <li><a href="{% url 'Event:detail' event.id %}">{{event.nomEvent  }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No events are available.</p>
+    {% endif %}
+    </p>
+
+</body>
+</html>
+
