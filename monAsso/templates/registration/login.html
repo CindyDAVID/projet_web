@@ -1,0 +1,37 @@
+{% block content %}
+<h1>Login</h1>
+
+{% if form.errors %}
+  <p>Votre identifiant ou mot de passe est incorrect. Veuillez réessayer</p>
+{% endif %}
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+  {% else %}
+    <p>Please login to see this page.</p>
+  {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<p>
+<input type=radio name=compte value=Association> Association
+<input type=radio name=compte value=Bénévole>Bénévole
+</p>
+<p>
+{{ form.username.label_tag }}
+{{ form.username }}
+</p>
+<p>
+{{ form.password.label_tag }}
+{{ form.password }}
+</p>
+<p>
+<input type="submit" value="Login">
+<input type="hidden" name="next" value="{{ next }}" />
+</p>
+</form>
+<p><a href="{% url 'password_reset' %}">Mot de passe oublié ?</a></p>
+
+{% endblock %}

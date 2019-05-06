@@ -49,7 +49,7 @@ def signup(request,userType):
                 benevole=Benevole(userResponsable=user)
 
                 benevole.save()
-                return redirect('profile')
+                return redirect('/profile')
         else:
             form = SignUpBenevoleForm()
         return render(request, 'monAsso/signup.html', {'form': form})
@@ -90,7 +90,7 @@ def createEvent(request):
         #check is user is an association account
         myAsso=Asso.objects.get(userResponsable=user)
     except:
-        return redirect('profile')
+        return redirect('/profile')
     form = EventForm(request.POST or None)
     if form.is_valid():
         nomEvent = form.cleaned_data.get('nomEvent')
@@ -104,7 +104,7 @@ def createEvent(request):
                          nbBenevole=nbBenevole)
         newEvent.save()
         # a revoir: on redirige vers la page event
-        return redirect('events')
+        return redirect('/events')
     else:
         form = EventForm(request.POST or None)
     return render(request, 'monAsso/create-event.html', {'form': form})
